@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Learning AngularJS</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<style>
+h1, h3, h4 {
+	margin-top: 12px;
+	margin-bottom: 6px;
+}
+h3 { 
+	color: DarkBlue;
+	border-bottom: 1px solid black;
+}
+h4 {
+	color: red;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 6px;
+}
+table, th, td {
+	border: 1px solid Indigo;
+}
+th, td {
+	padding: 5px;
+}
+tr:nth-child(odd) {
+	background-color: Lavender;
+}
+tr:nth-child(even) {
+	background-color: LightGoldenRodYellow;
+}
+</style>
+</head>
+<body>
+
+<h1>Learning AngularJS</h1>
+	
+<!-- To use AngularJS, add the ng-app attribute -->	
+<div ng-app="">
+	
+<h3>Data Binding</h3>
+	<!-- for now, use ng-init to initialize values,
+		 but later on use controller to initialize values -->
+	<div ng-init="quantity=4;price=10">
+		Quantity:	<input type="number" ng-model="quantity"><br>
+		Price:		<input type="number" ng-model="price">
+		
+		<!-- The ng-model directive binds the value of HTML controls
+			 (input, select, textarea) to application data. -->
+		
+		<p><span style="font-weight:bold;">
+			Total Amount:</span> {{ quantity * price }}</p>
+	</div>
+
+<h3>Repeating HTML Elements</h3>
+	<!-- scores is an array of integers -->
+	<div ng-init="scores=[24, 84, 94, 55, 34, 95, 100]">
+		<table>
+			<tr><th>Id</th><th>Score</th></tr>
+			<tr ng-repeat="score in scores track by $index">
+				<td>{{ $index + 1 }}</td><td>{{ score }}</td>
+			</tr>
+			
+			<!-- The ng-repeat directive clones HTML elements once 
+				 for each item in a collection (in an array). -->
+			
+		</table>
+	</div>
+
+</div><!-- ng-app -->
+
+<h3>AngularJS Controllers</h3>
+<!-- 
+AngularJS controllers control the data of AngularJS applications.
+AngularJS controllers are regular JavaScript Objects. 
+-->
+<div ng-app="myApp" ng-controller="myCtrl">
+
+First Name:	<input type="text" ng-model="firstName"><br>
+Last Name:	<input type="text" ng-model="lastName"><br>
+<br>
+<span style="font-weight:bold;">
+	Full Name</span>: {{ firstName + " " + lastName }} 
+
+</div><!-- myApp -->
+
+<!-- This is where we define an application and a controller -->
+<script>
+// Application
+var app = angular.module('myApp', []);
+
+// Controller
+app.controller('myCtrl', function($scope) {
+	// Initialize values here
+	$scope.firstName = "John";
+	$scope.lastName = "Doe";
+});
+</script>
+
+</body>
+</html>
+
+

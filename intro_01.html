@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Learning AngularJS</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<style>
+h1, h3, h4 {
+	margin-top: 12px;
+	margin-bottom: 6px;
+}
+h3 { 
+	color: DarkBlue;
+	border-bottom: 1px solid black;
+}
+h4 {
+	color: red;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<h1>Learning AngularJS</h1>
+
+<div>
+<h3>Without ng-app:</h3>
+	<p>The expression 5 + 5 evaluates to {{ 5 + 5 }}</p>
+</div>
+	
+<!-- To use AngularJS, add the ng-app attribute -->	
+<div ng-app="">
+	
+<h3>With ng-app:</h3>
+	<p>The expression 5 + 5 evaluates to {{ 5 + 5 }}</p>
+
+<h3>Numbers and Strings</h3>
+	<h4>Using expression</h4>
+		<div ng-init="quantity=3;cost=10">
+			<p>Total amount is {{ quantity * cost }}</p>
+		</div>
+		<div ng-init="firstName='Angelo';lastName='Doe'">
+			<p>Hello, Mr. {{ firstName + " " + lastName }}</p>
+		</div>
+	<h4>Using ng-bind</h4>
+		<div ng-init="quantity=3;cost=10">
+			<p>Total amount is <span ng-bind="quantity * cost"></span></p>
+		</div>
+		<div ng-init="firstName='Angelo';lastName='Doe'">
+			<p>Hello, Mr. <span ng-bind="firstName + ' ' + lastName"></span></p>
+		</div>
+
+<h3>Objects and Arrays</h3>
+	<div ng-init="person={firstName:'Martha',lastName:'Doe'}; points=[1,16,2,32,40]">
+		<h4>Using expression</h4>
+		<p>Your last name is {{ person.lastName }}</p>
+		<p>The fourth result is {{ points[3] }}</p>
+		
+		<h4>Using ng-bind</h4>
+		<p>Your first name is <span ng-bind="person.firstName"></span></p>
+		<p>The second result is <span ng-bind="points[1]"></span></p>
+	</div>
+	
+</div><!-- ng-app -->
+
+</body>
+</html>
+
+

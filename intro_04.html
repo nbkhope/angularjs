@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Learning AngularJS</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<style>
+h1, h3, h4 {
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+h3 { 
+	color: DarkBlue;
+	border-bottom: 1px solid black;
+}
+h4 {
+	color: green;
+	border-bottom: 1px solid black;
+	
+	margin-left: 6px;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<h1>Learning AngularJS</h1>
+
+<h3>AngularJS Filters</h3>
+
+<!-- 
+A filter can be added to an expression with
+a pipe character (|) and a filter.
+
+In this file, the following filters:
+uppercase, lowercase, currency
+-->
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+<h4>Uppercase and Lowercase filters</h4>
+	First Name:	<input type="text" ng-model="firstName"><br>
+	Last Name:	<input type="text" ng-model="lastName"><br>
+	<br>
+	<p>Your last name is: {{ lastName | uppercase }}</p>
+	<p>Your first name is: {{ firstName | lowercase }}</p>
+
+<h4>Currency filter</h4>
+	Quantity:	<input type="number" ng-model="quantity"><br>
+	Price:		<input type="number" ng-model="price"><br>
+	<br>
+	<p>Total amount is {{ (quantity * price) | currency }}</p>
+
+<h4>Adding Filters to Directives</h4>
+	<span style="font-weight:bold;">People</span>
+	<ul>
+		<!-- Here you apply a filter to orderBy country alphabetically -->
+		<li ng-repeat="person in names | orderBy:'country'">
+			{{ person.name + ', from ' + person.country }}
+		</li>
+	</ul>
+	
+<h4>Filtering Input</h4>
+<!-- 
+* An input filter can be added to a directive with
+a pipe character (|) and filter followed by a colon and a model name.
+
+* The filter filter selects a subset of an array 
+-->
+
+	Filter:	<input type="text" ng-model="lookup"><br>
+	
+	<span style="font-weight:bold;">People</span>
+	<ul>
+		<li ng-repeat="person in names | filter: lookup | orderBy:'country'">
+			{{ (person.name | uppercase) + ', from ' + person.country }}
+		</li>
+	</ul>
+
+
+</div><!-- myApp -->
+
+<!-- This is where we define an application and a controller -->
+<script>
+// Application
+var app = angular.module('myApp', []);
+
+// Controller
+app.controller('myCtrl', function($scope) {
+	// Initialize values here
+	$scope.firstName = "John";
+	$scope.lastName = "Doe";
+	
+	$scope.quantity = 5;
+	$scope.price = 2.49;
+
+	// Array of objects
+	$scope.names = [
+		{name: 'Anthony', country: 'United States'},
+		{name: 'Peng', country: 'China'},
+		{name: 'Yuki', country: 'Japan'},
+		{name: 'Kim', country: 'Korea'},
+		{name: 'Pedro', country: 'Brazil'}
+	];
+});
+</script>
+
+</body>
+</html>
+
+
